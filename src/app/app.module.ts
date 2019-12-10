@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as $ from 'jquery';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,8 @@ import { EditarfornecedoresComponent } from './pages/fornecedores/editarforneced
 import { NovofornecedoresComponent } from './pages/fornecedores/novofornecedores/novofornecedores.component';
 import { NovoclientesComponent } from './pages/clientes/novoclientes/novoclientes.component';
 import { EditarclientesComponent } from './pages/clientes/editarclientes/editarclientes.component';
+import { AppService } from './app.service';
+import { ProductService } from './services/produtos.service';
 
 @NgModule({
   declarations: [
@@ -38,12 +41,16 @@ import { EditarclientesComponent } from './pages/clientes/editarclientes/editarc
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [
     TableFilterPipe
   ],
-  providers: [],
+  providers: [
+    AppService,
+    ProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
