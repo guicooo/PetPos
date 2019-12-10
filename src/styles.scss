@@ -1,1 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+$yellow: #F4A522;
+$blue: #9DDBF0;
+$txt: #606060;
+
+
+.table {
+  thead {
+    background-color: $yellow;
+    color: white;
+  }
+}
+.btn-pet {
+  background-color: $yellow;
+  border-radius: 0;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.btn-voltar {
+  background-color: transparent;
+  border-radius: 0;
+  color: $yellow;
+  font-weight: bold;
+  font-size: 20px;
+  border: 1px solid $yellow;
+  margin-right: 15px;
+}
+
+.modal-header {
+  background-color: $yellow;
+  color: white;
+}
+
+.container {
+  padding-top: 50px;
+  padding-bottom: 10vh;
+}
+.navbar-toggler-icon {
+  padding-right: 30px;
+}

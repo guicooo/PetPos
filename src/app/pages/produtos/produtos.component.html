@@ -1,0 +1,55 @@
+<div class="container">
+    <app-title title="Produtos" link="novoproduto" novo="true"></app-title>
+    <div class="row mb-4">
+      <div class="col-12">
+        <input type="text" class="form-control" placeholder="Buscar produto" [(ngModel)]="searchText">
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+          <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>Quantidade</th>
+                      <th>Custo de compra</th>
+                      <th>Custo de venda</th>
+                      <th class="text-center">Editar</th>
+                      <th class="text-center">Deletar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  *ngFor="let item of produtos | tableFilter: {nome: searchText, quantidade:searchText,  custoCompra: searchText,  custoVenda: searchText}; let i=index;">
+                      <td>{{ item.nome }}</td>
+                      <td>{{ item.quantidade }}</td>
+                      <td>R${{ item.custoCompra }},00</td>
+                      <td>R${{ item.custoVenda }},00</td>
+                      <td class="icon text-center"><a [routerLink]="item._id"><img src="assets/img/icons/edit-01.svg"></a></td>
+                      <td class="icon text-center"><a (click)="deleteModal(item._id, item.nome)"><img src="assets/img/icons/trash-01.svg"></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+          </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Modal Delete -->
+  <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalDeleteLabel">Deseja apagar o item {{ deleteItemNome }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-voltar" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-pet" (click)="delete()">Apagar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+

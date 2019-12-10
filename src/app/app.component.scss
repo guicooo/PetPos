@@ -1,0 +1,50 @@
+@import '../styles.scss';
+$heightFooter: 9.5vh;
+
+.logo {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.navbar {
+  background-color: $yellow;
+  padding: 15px;
+  a {
+    color: white;
+  }
+}
+.active {
+  font-weight: bold;
+  border-bottom: 2px solid;
+}
+.nav-item {
+  padding: 0px 20px;
+}
+
+footer {
+  width: 100%;
+  background-color: $yellow;
+  position: fixed;
+  bottom: 0;
+  height: $heightFooter;
+  z-index: 2;
+  color: white;
+  padding-left: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.bar {
+  height: 4px;
+  background-color: white;
+  position: absolute;
+  width: 30px;
+}
+.navbar-nav {
+  @media (max-width: 600px) {
+    text-align: center;
+   }
+}

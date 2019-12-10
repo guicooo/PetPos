@@ -1,0 +1,53 @@
+@import '../../../styles.scss';
+
+$heightFooter: 9.5vh;
+
+
+.bg {
+  position: absolute;
+  right: 0;
+  top: 170px;
+  z-index: 3;
+  bottom: 0;
+  img {
+    height: 100%;
+    right: 0;
+    position: absolute;
+  }
+  @media (max-width: 600px) {
+    display: none;
+   }
+}
+footer {
+  width: 100%;
+  background-color: $yellow;
+  position: fixed;
+  bottom: 0;
+  height: $heightFooter;
+  z-index: 2;
+  color: white;
+  padding-left: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.title {
+  text-transform: uppercase;
+  color: $txt;
+  padding-left: 10vw;
+  position: absolute;
+  bottom: 18vh;
+  h1{
+    font-weight: bold;
+    font-size: 60px;
+    strong {
+      color: $yellow;
+    }
+  }
+  h2 {
+    font-size: 41px;
+  }
+  @media (max-width: 600px) {
+    bottom: auto;
+   }
+}
