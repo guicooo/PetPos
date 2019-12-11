@@ -20,6 +20,8 @@ import { NovoclientesComponent } from './pages/clientes/novoclientes/novocliente
 import { EditarclientesComponent } from './pages/clientes/editarclientes/editarclientes.component';
 import { AppService } from './app.service';
 import { ProductService } from './services/produtos.service';
+import { FornecedoresService } from './services/fornecedores.service';
+import { ClientService } from './services/cliente.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { ProductService } from './services/produtos.service';
   ],
   providers: [
     AppService,
-    ProductService
+    ProductService,
+    FornecedoresService,
+    ClientService
   ],
   bootstrap: [AppComponent]
 })

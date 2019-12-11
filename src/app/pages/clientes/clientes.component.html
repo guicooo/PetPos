@@ -1,36 +1,41 @@
 <div class="container">
     <app-title title="Clientes" link="novocliente" novo="true"></app-title>
-    <div class="row mb-4">
-      <div class="col-12">
-        <input type="text" class="form-control" placeholder="Buscar produto" [(ngModel)]="searchText">
-      </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-          <div class="table-responsive">
-              <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Nome</th>
-                      <th>CPF</th>
-                      <th>Telefone</th>
-                      <th class="text-center">Editar</th>
-                      <th class="text-center">Deletar</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr  *ngFor="let item of clientes | tableFilter: {nome: searchText, quantidade:searchText,  custoCompra: searchText,  custoVenda: searchText}; let i=index;">
-                      <td>{{ item.nome }}</td>
-                      <td>{{ item.cpf }}</td>
-                      <td>R${{ item.telefone }},00</td>
-                      <td class="icon text-center"><a [routerLink]="item._id"><img src="assets/img/icons/edit-01.svg"></a></td>
-                      <td class="icon text-center"><a (click)="deleteModal(item._id, item.nome)"><img src="assets/img/icons/trash-01.svg"></a></td>
-                    </tr>
-                  </tbody>
-                </table>
+    <div *ngIf="clients$ | async as clientes; else loadingError">
+      <div class="row mb-4">
+          <div class="col-12">
+            <input type="text" class="form-control" placeholder="Buscar produto" [(ngModel)]="searchText">
           </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+              <div class="table-responsive">
+                  <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Nome</th>
+                          <th>CPF</th>
+                          <th>Telefone</th>
+                          <th>Endereço</th>
+                          <th class="text-center">Editar</th>
+                          <th class="text-center">Deletar</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr  *ngFor="let item of clientes | tableFilter: {nome: searchText, quantidade:searchText,  custoCompra: searchText,  custoVenda: searchText}; let i=index;">
+                          <td>{{ item.name }}</td>
+                          <td>{{ item.cpf }}</td>
+                          <td>{{ item.telephone }}</td>
+                          <td>{{ item.address }}</td>
+                          <td class="icon text-center"><a [routerLink]="item._id"><img src="assets/img/icons/edit-01.svg"></a></td>
+                          <td class="icon text-center"><a (click)="deleteModal(item.id, item.name)"><img src="assets/img/icons/trash-01.svg"></a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+              </div>
+            </div>
+        </div>
     </div>
+
 </div>
 
   <!-- Modal Delete -->
@@ -51,3 +56,11 @@
     </div>
   </div>
 
+  <ng-template #loadingError>
+      <div *ngIf="error$ | async; else loading" >
+          <h4>Erro ao carregar a lista.</h4>
+      </div>
+      <ng-template #loading>
+          <div class="loader" id="loader-1"></div>
+      </ng-template>
+    </ng-template>

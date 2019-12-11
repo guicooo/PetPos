@@ -1,6 +1,8 @@
 export class Clientes {
-  nome: string;
+  address: string;
   cpf: string;
-  telefone: string;
-  _id: string;
+  id: string;
+  name: string;
+  orders: [];
+  telephone: string;
 }

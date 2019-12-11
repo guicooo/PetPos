@@ -1,7 +1,7 @@
 export class Fornecedores {
-  nome: string;
+  name: string;
   cnpj: string;
-  telefone: string;
-  seguimento: string;
-  _id: string;
+  telephone: string;
+  id: string;
+  products: [];
 }

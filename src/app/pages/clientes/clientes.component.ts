@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Clientes } from '../../interfaces/Clientes';
+import { Observable, Subject, EMPTY } from 'rxjs';
+import { ClientService } from 'src/app/services/cliente.service';
+import { catchError } from 'rxjs/operators';
 declare var $ :any;
 
 @Component({
@@ -10,28 +13,39 @@ declare var $ :any;
 export class ClientesComponent implements OnInit {
 
   public searchText: string;
-  public clientes: Clientes[];
   public deleteItemNome: string;
   public deleteItemId: string;
+  clients$: Observable<Clientes[]>;
+  error$ = new Subject<boolean>();
 
 
-  constructor() { }
+  constructor(private clientService: ClientService) { }
 
   ngOnInit() {
-     this.clientes = [
-      {nome: 'Djalma Djavan', cpf: '202.145.652', telefone: '1111 - 1111', _id: '1'},
-      {nome: 'Maria Djavan', cpf: '202.145.652', telefone: '1111 - 1111', _id: '2'},
-      {nome: 'Antonio Djavan', cpf: '202.145.652', telefone: '1111 - 1111', _id: '3'},
-    ];
+    this. listProduct();
   }
 
+  listProduct() {
+    this.clients$ = this.clientService.getClients()
+    .pipe(
+      catchError(error => {
+        console.log(error);
+        this.error$.next(true);
+        return EMPTY;
+      })
+    );
+  }
   deleteModal(id, nome) {
     $('#modalDelete').modal('show');
     this.deleteItemNome = nome;
     this.deleteItemId = id;
   }
   delete() {
-    console.log(this.deleteItemId);
+    this.clientService.deleteClient(this.deleteItemId)
+    .subscribe( data => {
+      $('#modalDelete').modal('hide');
+      this. listProduct();
+    });
   }
 
 }
