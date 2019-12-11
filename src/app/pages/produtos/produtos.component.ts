@@ -23,6 +23,10 @@ export class ProdutosComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit() {
+    this. listProduct();
+  }
+
+  listProduct() {
     this.products$ = this.productService.getProducts()
     .pipe(
       catchError(error => {
@@ -32,15 +36,17 @@ export class ProdutosComponent implements OnInit {
       })
     );
   }
-
-
   deleteModal(id, nome) {
     $('#modalDelete').modal('show');
     this.deleteItemNome = nome;
     this.deleteItemId = id;
   }
   delete() {
-    console.log(this.deleteItemId);
+    this.productService.deleteProduct(this.deleteItemId)
+    .subscribe( data => {
+      $('#modalDelete').modal('hide');
+      this. listProduct();
+    });
   }
 
 }

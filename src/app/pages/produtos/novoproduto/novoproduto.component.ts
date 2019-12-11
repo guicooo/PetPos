@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ProductService } from 'src/app/services/produtos.service';
 
 @Component({
   selector: 'app-novoproduto',
@@ -9,19 +10,28 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class NovoprodutoComponent implements OnInit {
 
   public form = new FormGroup ({
-    nome: new FormControl (null, Validators.required),
-    quantidade: new FormControl (null, Validators.required),
-    custoCompra: new FormControl (null, Validators.required),
-    custoVenda: new FormControl (null, Validators.required),
+    description: new FormControl (null, Validators.required),
+    name: new FormControl (null, Validators.required),
+    price: new FormControl (null, Validators.required),
+    quantity: new FormControl (null, Validators.required),
+    vals: new FormControl (null, Validators.required),
   });
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    console.log('1');
+    // this.submited = true;
+    console.log(this.form.value);
+    if (this.form.valid) {
+      this.productService.newProduct(this.form.value).subscribe(
+        success => console.log('sucesso'),
+        error => console.error('error'),
+        () => console.log('request completo'),
+      );
+    }
   }
 }
 

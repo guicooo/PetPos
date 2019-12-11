@@ -1,7 +1,8 @@
 export class Produtos {
-  nome: string;
-  quantidade: string;
-  custoCompra: string;
-  custoVenda: string;
-  _id: string;
+  name: string;
+  quantity: string;
+  price: string;
+  vals: string;
+  id: string;
+  description: string;
 }
