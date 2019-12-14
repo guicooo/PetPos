@@ -4,6 +4,7 @@ import { ProductService } from 'src/app/services/produtos.service';
 import { Observable, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 declare var $ :any;
 
 @Component({
@@ -20,7 +21,7 @@ export class ProdutosComponent implements OnInit {
   error$ = new Subject<boolean>();
 
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this. listProduct();
@@ -45,8 +46,14 @@ export class ProdutosComponent implements OnInit {
     this.productService.deleteProduct(this.deleteItemId)
     .subscribe( data => {
       $('#modalDelete').modal('hide');
+      this.toastr.success('Item deletado com sucesso')
       this. listProduct();
-    });
+    },
+    error => {
+      this.toastr.error(`Ocorreu algum erro inesperado`);
+      $('#modalDelete').modal('hide');
+    }
+    );
   }
 
 }

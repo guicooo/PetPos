@@ -15,7 +15,7 @@ export class ProductService {
   }
 
   getProducts() {
-    return this.http.get<Produtos[]>(this.urlAPI)
+    return this.http.get<Produtos[]>(this.urlAPI, this.appService.requestOptions)
     .pipe(
       tap(console.log)
     );
@@ -28,11 +28,19 @@ export class ProductService {
   }
 
   newProduct(produto) {
-    return this.http.post<Produtos>(this.urlAPI, produto)
+    return this.http.post<Produtos>(this.urlAPI, produto, this.appService.requestOptions)
     .pipe (
       take(1)
     );
   }
+
+  editProduct(id, produto) {
+    return this.http.put<Produtos>(`${this.urlAPI}/${id}`, produto, this.appService.requestOptions)
+    .pipe (
+      take(1)
+    );
+  }
+
   deleteProduct(id) {
     return this.http.delete(`${this.urlAPI}/${id}`);
   }

@@ -33,6 +33,12 @@ export class ClientService {
       take(1)
     );
   }
+  editClient(id, cliente) {
+    return this.http.put<Clientes>(`${this.urlAPI}/${id}`, cliente, this.appService.requestOptions)
+    .pipe (
+      take(1)
+    );
+  }
   deleteClient(id) {
     return this.http.delete(`${this.urlAPI}/${id}`);
   }

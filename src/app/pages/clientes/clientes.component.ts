@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { Clientes } from '../../interfaces/Clientes';
 import { Observable, Subject, EMPTY } from 'rxjs';
@@ -19,7 +20,7 @@ export class ClientesComponent implements OnInit {
   error$ = new Subject<boolean>();
 
 
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientService, private toastr : ToastrService) { }
 
   ngOnInit() {
     this. listProduct();
@@ -44,8 +45,14 @@ export class ClientesComponent implements OnInit {
     this.clientService.deleteClient(this.deleteItemId)
     .subscribe( data => {
       $('#modalDelete').modal('hide');
+      this.toastr.success('Item deletado com sucesso')
       this. listProduct();
-    });
+    },
+    error => {
+      this.toastr.error(`Ocorreu algum erro inesperado`);
+      $('#modalDelete').modal('hide');
+    }
+    );
   }
 
 }

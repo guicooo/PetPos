@@ -27,6 +27,13 @@ export class FornecedoresService {
     );
   }
 
+  editProviders(id, fornecedor) {
+    return this.http.put<Fornecedores>(`${this.urlAPI}/${id}`, fornecedor, this.appService.requestOptions)
+    .pipe (
+      take(1)
+    );
+  }
+
   newProvider(fornecedor) {
     return this.http.post<Fornecedores>(this.urlAPI, fornecedor)
     .pipe (

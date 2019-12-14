@@ -26,7 +26,7 @@
                           <td>{{ item.cpf }}</td>
                           <td>{{ item.telephone }}</td>
                           <td>{{ item.address }}</td>
-                          <td class="icon text-center"><a [routerLink]="item._id"><img src="assets/img/icons/edit-01.svg"></a></td>
+                          <td class="icon text-center"><a [routerLink]="item.id"><img src="assets/img/icons/edit-01.svg"></a></td>
                           <td class="icon text-center"><a (click)="deleteModal(item.id, item.name)"><img src="assets/img/icons/trash-01.svg"></a></td>
                         </tr>
                       </tbody>

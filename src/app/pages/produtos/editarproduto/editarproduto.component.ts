@@ -4,7 +4,8 @@ import { ProductService } from 'src/app/services/produtos.service';
 import { Observable, Subject, EMPTY, Subscription } from 'rxjs';
 import { Produtos } from 'src/app/interfaces/Produtos';
 import { catchError } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-editarproduto',
@@ -19,7 +20,12 @@ export class EditarprodutoComponent implements OnInit {
   public product: Produtos = new Produtos();
 
 
-  constructor(private productService: ProductService, private router: ActivatedRoute, private formBuilder: FormBuilder) {
+  constructor(private productService: ProductService,
+              private router: ActivatedRoute,
+              private formBuilder: FormBuilder,
+              private toastr: ToastrService,
+              private _router: Router
+              ) {
 
   }
 
@@ -47,6 +53,13 @@ export class EditarprodutoComponent implements OnInit {
 
   onSubmit() {
     console.log(this.product);
-  }
+    this.productService.editProduct(this.id, this.product)
+    .subscribe(dados => {
+      console.log(dados);
+      this.toastr.success(`Produto atualizado com sucesso`);
+      this._router.navigate(['/produtos']);
+    },
+    error => this.toastr.error(`Ocorreu algum erro inesperado`)
+  )}
 
 }

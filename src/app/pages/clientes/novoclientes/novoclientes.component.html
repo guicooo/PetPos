@@ -6,7 +6,7 @@
           <form (ngSubmit)="onSubmit()" [formGroup]="form">
               <div class="form-group ">
                   <label for="nome">Nome:</label>
-                  <input formControlName="nome" type="text" class="form-control" id="nome" placeholder="Nome do cliente">
+                  <input formControlName="name" type="text" class="form-control" id="name" placeholder="Nome do cliente">
               </div>
               <div class="form-row">
                   <div class="form-group col-md-6">
@@ -16,10 +16,13 @@
 
                   <div class="form-group col-md-6">
                       <label for="telefone">Telefone:</label>
-                      <input formControlName="telefone" type="text" class="form-control" id="telefone" placeholder="Qual o telefone do cliente?">
+                      <input formControlName="telephone" type="text" class="form-control" id="telephone" placeholder="Qual o telefone do cliente?">
                   </div>
               </div>
-
+              <div class="form-group ">
+                <label for="nome">Endereço:</label>
+                <input formControlName="address" type="text" class="form-control" id="address" placeholder="Endereço do cliente">
+            </div>
 
               <div class="row text-right mt-5">
                 <div class="col-12">
